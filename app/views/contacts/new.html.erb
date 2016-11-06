@@ -1,0 +1,9 @@
+<h1>ContactuallyLite</h1>
+<p>Upload your list of contacts below:</p>
+<%= form_tag("/contacts/load", :multipart => true) do %>
+  <p>
+    <%= label_tag :file %>
+    <%= file_field_tag :file %>
+  </p>
+    <%= submit_tag 'Submit' %>
+<% end %>
