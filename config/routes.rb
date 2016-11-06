@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'contacts#new'
 
-  post "/contacts/load" => "contacts#load"
+  post '/contacts/load' => 'contacts#load'
+
+  get '/contacts' => 'contacts#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

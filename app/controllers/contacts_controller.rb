@@ -5,17 +5,20 @@ class ContactsController < ApplicationController
 
   def load
     file = contact_params[:file]
-    contacts = CSV.read(file.path, { :col_sep => "\t" })
+    # parse tsv file
+    rows = CSV.read(file.path, { :col_sep => "\t" })
+    # convert headers
+    headers = rows.shift.map { | header| header.gsub!(/( )/, '_').downcase! }
 
-    contacts.each do |contact|
-      puts contact
-    end
+    contacts = rows.map { |row| Hash[headers.zip(row)] }
 
-    redirect_to "/"
+    Contact.create(contacts);
+
+    redirect_to "/contacts"
   end
 
-  def show
-
+  def index
+    @contacts = Contact.all
   end
   # def create
   #   @contact.Contact.new(contact_params)
