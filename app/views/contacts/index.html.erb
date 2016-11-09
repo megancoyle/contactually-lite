@@ -1,24 +1,5 @@
+<h1>Contacts</h1>
+
 <%= react_component("ContactsApp", props: {
     contacts: @contacts
   }, prerender: false) %>
-
-<!-- <h1>Contacts</h1>
-
-<table>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email Address</th>
-    <th>Phone Number</th>
-    <th>Company Name</th>
-  </tr>
-  <% @contacts.each do |contact| %>
-  <tr>
-    <td><%= contact.first_name %></td>
-    <td><%= contact.last_name %></td>
-    <td><%= contact.email_address %></td>
-    <td><%= contact.phone_number %></td>
-    <td><%= contact.company_name %></td>
-  </tr>
-  <% end %>
-</table> -->
