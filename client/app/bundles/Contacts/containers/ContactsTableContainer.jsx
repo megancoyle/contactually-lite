@@ -18,12 +18,12 @@ export default class ContactsTableContainer extends React.Component {
      };
 
     this.sortBy = this.sortBy.bind(this);
-    this.toggleDotComOnly = this.toggleDotComOnly.bind(this);
-    this.toggleExtensionOnly = this.toggleExtensionOnly.bind(this);
-    this.toggleInternationalOnly = this.toggleInternationalOnly.bind(this);
+    this.sortByDotComOnly = this.sortByDotComOnly.bind(this);
+    this.sortByExtensionOnly = this.sortByExtensionOnly.bind(this);
+    this.sortByInternationalOnly = this.sortByInternationalOnly.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
-  // handle sorting alphabetically
+  // handle sorting alphabetically - just specify item to sort as argument
   sortBy(key) {
     const contacts = this.state.contacts;
     const sorted = this.state.contacts.sort((contactA, contactB) => {
@@ -33,11 +33,11 @@ export default class ContactsTableContainer extends React.Component {
     this.setState({ contacts: sorted });
   }
   // sorting by dot com emails
-  toggleDotComOnly(e) {
+  sortByDotComOnly(e) {
     const dotComOnly = !this.state.dotComOnly;
 
     const contacts = this.props.contacts.filter(contact => {
-      return !dotComOnly || contact.email_address.endsWith('.com');
+      return contact.email_address.endsWith('.com');
     })
 
     this.setState({
@@ -46,11 +46,11 @@ export default class ContactsTableContainer extends React.Component {
     })
   }
   // sorting by numbers with extensions
-  toggleExtensionOnly(e) {
+  sortByExtensionOnly(e) {
     const extensionOnly = !this.state.extensionOnly;
 
     const contacts = this.props.contacts.filter(contact => {
-      return !extensionOnly || contact.phone_number.includes('x');
+      return contact.phone_number.includes('x');
     })
 
     this.setState({
@@ -59,11 +59,11 @@ export default class ContactsTableContainer extends React.Component {
     })
   }
   // sorting by international numbers
-  toggleInternationalOnly(e) {
+  sortByInternationalOnly(e) {
     const internationalOnly = !this.state.internationalOnly;
 
     const contacts = this.props.contacts.filter(contact => {
-      return !internationalOnly || contact.phone_number.startsWith('1-');
+      return contact.phone_number.startsWith('1-');
     })
 
     this.setState({
@@ -91,17 +91,17 @@ export default class ContactsTableContainer extends React.Component {
           Sort by email
         </button>
         <button
-          onClick={this.toggleDotComOnly}
+          onClick={this.sortByDotComOnly}
         >
           .com emails only
         </button>
         <button
-          onClick={this.toggleExtensionOnly}
+          onClick={this.sortByExtensionOnly}
         >
           extensions only
         </button>
         <button
-          onClick={this.toggleInternationalOnly}
+          onClick={this.sortByInternationalOnly}
         >
           international only
         </button>
