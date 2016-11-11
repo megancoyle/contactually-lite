@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ContactsTable from '../components/ContactsTable';
+import axios from 'axios';
 
 export default class ContactsTableContainer extends React.Component {
   static propTypes = {
@@ -20,6 +21,7 @@ export default class ContactsTableContainer extends React.Component {
     this.toggleDotComOnly = this.toggleDotComOnly.bind(this);
     this.toggleExtensionOnly = this.toggleExtensionOnly.bind(this);
     this.toggleInternationalOnly = this.toggleInternationalOnly.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   sortBy(key) {
@@ -70,6 +72,11 @@ export default class ContactsTableContainer extends React.Component {
     })
   }
 
+  handleDelete(contact) {
+    axios.delete(`/contacts/${contact.id}`);
+    const contacts = this.state.contacts.filter(c => c.id !== contact.id);
+    this.setState({ contacts });
+  }
 
   render() {
     const { contacts, dotComOnly, extensionOnly, internationalOnly } = this.state;
@@ -100,7 +107,10 @@ export default class ContactsTableContainer extends React.Component {
           onChange={this.toggleInternationalOnly}
         />
 
-        <ContactsTable contacts={contacts} />
+        <ContactsTable
+         onDelete={this.handleDelete}
+         contacts={contacts}
+        />
       </div>
     );
   }

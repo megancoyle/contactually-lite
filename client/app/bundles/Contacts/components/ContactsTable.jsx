@@ -2,11 +2,14 @@ import React, { PropTypes } from 'react';
 
 export default class ContactsTable extends React.Component {
   static propTypes = {
-    contacts: PropTypes.array.isRequired
+    contacts: PropTypes.array.isRequired,
+    onDelete: PropTypes.func.isRequired
   };
 
   render() {
-    const contacts = this.props.contacts;
+    const { contacts, onDelete } = this.props;
+    // const contacts = this.props.contacts;
+    // const onDelete = this.props.onDelete;
 
     return (
       <div>
@@ -18,6 +21,7 @@ export default class ContactsTable extends React.Component {
               <th>Email Address</th>
               <th>Phone Number</th>
               <th>Company Name</th>
+              <th></th>
             </tr>
             {contacts.map((contact, i) => (
             <tr key={i}>
@@ -26,6 +30,10 @@ export default class ContactsTable extends React.Component {
               <td>{contact.email_address}</td>
               <td>{contact.phone_number}</td>
               <td>{contact.company_name}</td>
+              <td><a href='' onClick={(event) => {
+                event.preventDefault();
+                onDelete(contact);
+              }}>x</a></td>
             </tr>
           ))}
           </tbody>

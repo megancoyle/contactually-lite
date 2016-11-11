@@ -11,5 +11,4 @@
 // about supported directives.
 //
 //= require webpack-bundle
-//= require turbolinks
 //= require_tree .

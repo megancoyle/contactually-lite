@@ -1,10 +1,11 @@
 class ContactsController < ApplicationController
-  def new
-    # @contact = Contact.new
+
+  def index
+    @contacts = Contact.all
   end
 
   def load
-    file = contact_params[:file]
+    file = upload_params[:file]
     # parse tsv file
     rows = CSV.read(file.path, { :col_sep => "\t" })
     # convert headers
@@ -14,24 +15,21 @@ class ContactsController < ApplicationController
 
     Contact.create(contacts);
 
-    redirect_to "/contacts"
+    redirect_to contacts_path
   end
 
-  def index
-    @contacts = Contact.all
+  def new
+    @contact = Contact.new
   end
-  # def create
-  #   @contact.Contact.new(contact_params)
-  #
-  #   if @contact.save
-  #     redirect_to @contact
-  #   else
-  #     render'new'
-  #   end
-  # end
-  #
+
+  def destroy
+    contact = Contact.find(params[:id])
+    contact.destroy
+    render json: contact
+  end
+
   private
-    def contact_params
+    def upload_params
       params.permit(:file)
     end
 end
