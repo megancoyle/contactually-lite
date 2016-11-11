@@ -1,5 +1,14 @@
-<h1>Contacts</h1>
+<div class="container contacts-index">
+  <h1>Contacts</h1>
 
-<%= react_component("ContactsApp", props: {
-    contacts: @contacts
-  }, prerender: false) %>
+  <% if @contacts.present? %>
+    <%= react_component("ContactsApp", props: {
+        contacts: @contacts
+      }, prerender: false) %>
+    <% else %>
+    <div class="start-message">
+      <p>Looks like you need to upload some contacts.</p>
+      <%= link_to 'Get Started!', root_path, :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

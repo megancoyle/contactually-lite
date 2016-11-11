@@ -85,26 +85,28 @@ export default class ContactsTableContainer extends React.Component {
 
     return (
       <div>
-        <button
-          onClick={() => this.sortBy('email_address')}
-        >
-          Sort by email
-        </button>
-        <button
-          onClick={this.sortByDotComOnly}
-        >
-          .com emails only
-        </button>
-        <button
-          onClick={this.sortByExtensionOnly}
-        >
-          extensions only
-        </button>
-        <button
-          onClick={this.sortByInternationalOnly}
-        >
-          international only
-        </button>
+        <div className="filters">
+          <button
+            onClick={() => this.sortBy('email_address')}
+          >
+            Sort by email
+          </button>
+          <button
+            onClick={this.sortByDotComOnly}
+          >
+            .com emails only
+          </button>
+          <button
+            onClick={this.sortByExtensionOnly}
+          >
+            extensions only
+          </button>
+          <button
+            onClick={this.sortByInternationalOnly}
+          >
+            international only
+          </button>
+        </div>
 
         <ContactsTable
          onDelete={this.handleDelete}

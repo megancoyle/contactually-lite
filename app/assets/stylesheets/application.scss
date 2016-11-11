@@ -1,0 +1,85 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+
+ nav {
+     background-color: #475767;
+     a {
+       color: white;
+          &:hover, &:focus {
+            color: #c6503e;
+          }
+     }
+ }
+
+.nav {
+  li {
+    a{
+      &:hover {
+        background: #475767;
+      }
+      &:focus {
+        background: #475767;
+      }
+    }
+  }
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.navbar-nav {
+  float: right;
+}
+
+.new-contact {
+  background: url('/images/computer.jpg');
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
+  padding-top: 10%;
+  margin-top: -20px;
+}
+
+.hero-text {
+  max-width: 500px;
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  h1 {
+    font-weight: 300;
+    font-size: 4em;
+  }
+  p {
+    font-size: 1.5em;
+  }
+  #file {
+    margin: auto;
+    font-size: .6em;
+  }
+  .btn {
+    margin-top: 20px;
+  }
+}
+
+.contacts-index {
+  h1, .start-message {
+    text-align: center;
+  }
+}
