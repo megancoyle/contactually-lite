@@ -23,7 +23,7 @@ export default class ContactsTableContainer extends React.Component {
     this.toggleInternationalOnly = this.toggleInternationalOnly.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
-
+  // handle sorting alphabetically
   sortBy(key) {
     const contacts = this.state.contacts;
     const sorted = this.state.contacts.sort((contactA, contactB) => {
@@ -32,7 +32,7 @@ export default class ContactsTableContainer extends React.Component {
 
     this.setState({ contacts: sorted });
   }
-
+  // sorting by dot com emails
   toggleDotComOnly(e) {
     const dotComOnly = !this.state.dotComOnly;
 
@@ -45,7 +45,7 @@ export default class ContactsTableContainer extends React.Component {
       contacts
     })
   }
-
+  // sorting by numbers with extensions
   toggleExtensionOnly(e) {
     const extensionOnly = !this.state.extensionOnly;
 
@@ -58,12 +58,12 @@ export default class ContactsTableContainer extends React.Component {
       contacts
     })
   }
-
+  // sorting by international numbers
   toggleInternationalOnly(e) {
     const internationalOnly = !this.state.internationalOnly;
 
     const contacts = this.props.contacts.filter(contact => {
-      return !internationalOnly || contact.phone_number.includes('1-');
+      return !internationalOnly || contact.phone_number.startsWith('1-');
     })
 
     this.setState({
@@ -72,12 +72,14 @@ export default class ContactsTableContainer extends React.Component {
     })
   }
 
+  // delete contact with axios and ajax
   handleDelete(contact) {
     axios.delete(`/contacts/${contact.id}`);
     const contacts = this.state.contacts.filter(c => c.id !== contact.id);
     this.setState({ contacts });
   }
 
+  // display filters on the DOM
   render() {
     const { contacts, dotComOnly, extensionOnly, internationalOnly } = this.state;
 
@@ -88,24 +90,21 @@ export default class ContactsTableContainer extends React.Component {
         >
           Sort by email
         </button>
-        <label>.com emails only</label>
-        <input
-          type="checkbox"
-          checked={dotComOnly}
-          onChange={this.toggleDotComOnly}
-        />
-        <label>extensions only</label>
-        <input
-          type="checkbox"
-          checked={extensionOnly}
-          onChange={this.toggleExtensionOnly}
-        />
-        <label>international only</label>
-        <input
-          type="checkbox"
-          checked={internationalOnly}
-          onChange={this.toggleInternationalOnly}
-        />
+        <button
+          onClick={this.toggleDotComOnly}
+        >
+          .com emails only
+        </button>
+        <button
+          onClick={this.toggleExtensionOnly}
+        >
+          extensions only
+        </button>
+        <button
+          onClick={this.toggleInternationalOnly}
+        >
+          international only
+        </button>
 
         <ContactsTable
          onDelete={this.handleDelete}
